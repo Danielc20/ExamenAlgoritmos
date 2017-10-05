@@ -3,22 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package examenalgoritmos;
+package Testing;
+
+import examenalgoritmos.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author Daniel
  */
-public class ExamenAlgoritmos {
+public class ArbolBBTest {
 
-    private static ABB miArbol;
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
+    private ABB miArbol;
+
+    public ArbolBBTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
         Cliente xC1 = new Cliente(56856958, "Julian", "Lopez");
         Cliente xC2 = new Cliente(49658547, "Martica", "Gimenez");
         Cliente xC3 = new Cliente(32158547, "Roberto", "Mamerto");
@@ -37,7 +52,17 @@ public class ExamenAlgoritmos {
         Nc2.setIzq(Nc4);
         Nc2.setDer(Nc3);
 
-        miArbol.setRaiz(Nc1);
+        miArbol = new ABB(Nc1);
+
     }
-    
+
+    @After
+    public void tearDown() {
+    }
+
+    @Test
+    public void testPeso() {
+        int Peso = miArbol.Peso(miArbol.getRaiz());
+        assertEquals(4, Peso);
+    }
 }
