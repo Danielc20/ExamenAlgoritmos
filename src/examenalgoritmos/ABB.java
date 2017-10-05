@@ -81,14 +81,15 @@ public class ABB {
      * @return 0 si r == null | r > 0 si tiene nodos
      */
     public int Peso(Nodo r, int ptotal) {
+        
         if (r.getIzq() != null) {
-            ptotal += Peso(r.getIzq(), ptotal);
+            ptotal = Peso(r.getIzq(), ptotal);
         }
 
         if (r.getDer() != null) {
-            ptotal += Peso(r.getDer(), ptotal);
+            ptotal = Peso(r.getDer(), ptotal);
         }
 
-        return ptotal += 1;
+        return ++ptotal;
     }
 }
