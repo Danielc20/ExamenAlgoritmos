@@ -10,7 +10,7 @@ package examenalgoritmos;
  * @author Daniel
  */
 public class Nodo {
- 
+
     private Nodo Izq;
     private Nodo Der;
     private Cliente Cliente;
@@ -45,7 +45,8 @@ public class Nodo {
     public void setCliente(Cliente Cliente) {
         this.Cliente = Cliente;
     }
-    
-    
-    
+
+    public boolean isHoja() {
+        return this.Izq == null && this.Der == null;
+    }
 }

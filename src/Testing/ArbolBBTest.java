@@ -62,6 +62,11 @@ public class ArbolBBTest {
 
     @Test
     public void testPeso() {
-        assertEquals(4, miArbol.Peso(this.miArbol.getRaiz()));
+        assertEquals(4, miArbol.getPeso(this.miArbol.getRaiz()));
+    }
+    
+    @Test
+    public void testAltura(){
+        assertEquals(2, miArbol.getAltura());
     }
 }

@@ -62,14 +62,24 @@ public class ABB {
     }
 
     /**
+     * Devuelve el peso del arbol completo a partir del nodo raiz (El peso no
+     * tiene en cuenta al nodo raiz)
+     *
+     * @return 0 si r == null
+     */
+    public int getPeso() {
+        return getPeso(this.Raiz, -1);
+    }
+
+    /**
      * Devuelve el peso del sub-arbol a partir del nodo raiz (El peso no tiene
      * en cuenta al nodo raiz)
      *
      * @param r nodo raiz del sub-arbol
-     * @return 0 si r == null | r > 0 si tiene nodos
+     * @return 0 si r == null
      */
-    public int Peso(Nodo r) {
-        return Peso(r, -1);
+    public int getPeso(Nodo r) {
+        return getPeso(r, -1);
     }
 
     /**
@@ -78,18 +88,46 @@ public class ABB {
      *
      * @param r nodo raiz del sub-arbol
      * @param ptotal Variable Auxiliar para contar cada Nodo.
-     * @return 0 si r == null | r > 0 si tiene nodos
+     * @return 0 si r == null
      */
-    public int Peso(Nodo r, int ptotal) {
-        
+    public int getPeso(Nodo r, int ptotal) {
+
         if (r.getIzq() != null) {
-            ptotal = Peso(r.getIzq(), ptotal);
+            ptotal = getPeso(r.getIzq(), ptotal);
         }
 
         if (r.getDer() != null) {
-            ptotal = Peso(r.getDer(), ptotal);
+            ptotal = getPeso(r.getDer(), ptotal);
         }
 
         return ++ptotal;
+    }
+
+    /**
+     * Devuelve la Altura del Arbol desde la raiz
+     *
+     * @return -1 si r == null
+     */
+    public int getAltura() {
+        return getAltura(this.Raiz);
+    }
+
+    /**
+     * Devuelve la Cantidad de NODOS que hay entre un nodo r y la hoja mas
+     * lejana de este
+     *
+     * @param r
+     * @return
+     */
+    public int getAltura(Nodo r) {
+
+        if (r == null) {
+            return 0;
+        } else {
+            if (r.isHoja()) {
+                return 0;
+            }
+            return 1 + (Math.max(getAltura(r.getIzq()), getAltura(r.getDer())));
+        }
     }
 }
