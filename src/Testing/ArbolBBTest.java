@@ -6,6 +6,7 @@
 package Testing;
 
 import examenalgoritmos.*;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -68,5 +69,10 @@ public class ArbolBBTest {
     @Test
     public void testAltura(){
         assertEquals(2, miArbol.getAltura());
+    }
+    
+    @Test
+    public void testEs_Cliente(){
+        assertEquals(true, miArbol.es_Cliente(69652020));
     }
 }

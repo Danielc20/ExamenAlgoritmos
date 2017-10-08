@@ -5,6 +5,8 @@
  */
 package examenalgoritmos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Daniel
@@ -34,21 +36,85 @@ public class ABB {
         this.Raiz = Raiz;
     }
 
+    public void insertNodo(Cliente c) {
+        this.Raiz = insertNodo(this.Raiz, c);
+    }
+
+    public Nodo insertNodo(Nodo r, Cliente c) {
+        if (r == null) {
+            return new Nodo(c);
+        } else if (c.getCi() <= r.getCliente().getCi()) {
+            r.setIzq(insertNodo(r.getIzq(), c));
+        } else {
+            r.setDer(insertNodo(r.getDer(), c));
+        }
+        return r;
+    }
+
+    public void PreOrder() {
+        PreOrder(this.Raiz);
+    }
+
+    public void PreOrder(Nodo r) {
+        /*En caso de que 'r' entre valiendo nulo*/
+        if (r != null) {
+            System.out.println(r.getCliente().getCi());
+        }
+
+        if (r.getIzq() != null) {
+            InOrder(r.getIzq());
+        }
+
+        if (r.getDer() != null) {
+            InOrder(r.getDer());
+        }
+    }
+
+    /**
+     * Busca si el cliente existe dentro del Arbol de Clientes
+     *
+     * @param ci Cedula del cliente
+     * @return true si existe el cliente | false sinó
+     */
+    public boolean es_Cliente(int ci) {
+        return es_Cliente(this.Raiz, ci);
+    }
+
+    /**
+     * (Metodo Recursivo) Busca si el cliente existe dentro del Arbol de
+     * Clientes
+     *
+     * @param r Nodo actual
+     * @param ci Cedula del cliente
+     * @return true si existe el cliente | false sinó
+     */
+    public boolean es_Cliente(Nodo r, int ci) {
+        if (r == null) {
+            return false;
+        } else if (ci < r.getCliente().getCi()) {
+            return es_Cliente(r.getIzq(), ci);
+        } else if (ci > r.getCliente().getCi()) {
+            return es_Cliente(r.getDer(), ci);
+        }
+        return true;
+    }
+
     /**
      * Devuelve todos los clientes ordenados por cedula de forma ascendente
      */
     public void Mostrar_Clientes() {
-        Mostrar_Clientes(this.Raiz);
+        InOrder(this.Raiz);
     }
 
     /**
-     * Metodo recursivo de Mostrar_Clientes()
+     * (Metodo Recursivo) Devuelve todos los clientes ordenados por cedula de
+     * forma ascendente
      *
-     * @param r Nodo recursivo
+     * @param r Nodo actual
      */
-    public void Mostrar_Clientes(Nodo r) {
+    public void InOrder(Nodo r) {
         if (r.getIzq() != null) {
-            Mostrar_Clientes(r.getIzq());
+            InOrder(r.getIzq());
         }
 
         /*En caso de que 'r' entre valiendo nulo*/
@@ -57,7 +123,7 @@ public class ABB {
         }
 
         if (r.getDer() != null) {
-            Mostrar_Clientes(r.getDer());
+            InOrder(r.getDer());
         }
     }
 
@@ -72,8 +138,8 @@ public class ABB {
     }
 
     /**
-     * Devuelve el peso del sub-arbol a partir del nodo raiz (El peso no tiene
-     * en cuenta al nodo raiz)
+     * (Metodo Recursivo) Devuelve el peso del sub-arbol a partir del nodo raiz
+     * (El peso no tiene en cuenta al nodo raiz)
      *
      * @param r nodo raiz del sub-arbol
      * @return 0 si r == null
@@ -83,8 +149,7 @@ public class ABB {
     }
 
     /**
-     * Metodo recursivo para caluclar el peso de un sub-arbol a partir de un
-     * nodo raiz
+     * (Metodo Recursivo) Devuelve el peso del sub-arbol a partir del nodo raiz
      *
      * @param r nodo raiz del sub-arbol
      * @param ptotal Variable Auxiliar para contar cada Nodo.
@@ -113,11 +178,11 @@ public class ABB {
     }
 
     /**
-     * Devuelve la Cantidad de NODOS que hay entre un nodo r y la hoja mas
+     * (Metodo Recursivo) Devuelve la Cantidad de NODOS que hay entre un nodo r y la hoja mas
      * lejana de este
      *
      * @param r
-     * @return
+     * @return Altura Maxima del arbol
      */
     public int getAltura(Nodo r) {
 
