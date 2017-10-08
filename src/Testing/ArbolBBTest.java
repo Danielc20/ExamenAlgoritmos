@@ -41,20 +41,13 @@ public class ArbolBBTest {
         Cliente xC4 = new Cliente(29653347, "Pepe", "Cohen");
         Cliente xC5 = new Cliente(69652020, "Miguel", "Aguado");
 
-        Nodo Nc1 = new Nodo(xC1);
-        Nodo Nc2 = new Nodo(xC2);
-        Nodo Nc3 = new Nodo(xC3);
-        Nodo Nc4 = new Nodo(xC4);
-        Nodo Nc5 = new Nodo(xC5);
-
-        Nc1.setIzq(Nc2);
-        Nc1.setDer(Nc5);
-
-        Nc2.setIzq(Nc4);
-        Nc2.setDer(Nc3);
-
-        miArbol = new ABB(Nc1);
-
+        miArbol = new ABB();
+        
+        miArbol.insertNodo(xC1);
+        miArbol.insertNodo(xC2);
+        miArbol.insertNodo(xC3);
+        miArbol.insertNodo(xC4);
+        miArbol.insertNodo(xC5);
     }
 
     @After
@@ -65,14 +58,24 @@ public class ArbolBBTest {
     public void testPeso() {
         assertEquals(4, miArbol.getPeso(this.miArbol.getRaiz()));
     }
-    
+
     @Test
-    public void testAltura(){
-        assertEquals(2, miArbol.getAltura());
+    public void testAltura() {
+        assertEquals(3, miArbol.getAltura());
+    }
+
+    @Test
+    public void testEs_Cliente() {
+        assertEquals(true, miArbol.es_Cliente(69652020));
+    }
+
+    @Test
+    public void testEs_ClienteNodo() {
+        assertEquals(29653347, miArbol.es_ClienteNodo(29653347).getCliente().getCi());
     }
     
     @Test
-    public void testEs_Cliente(){
-        assertEquals(true, miArbol.es_Cliente(69652020));
+    public void testEs_Balanceado(){
+        assertEquals(false, miArbol.es_Equilibrado());
     }
 }

@@ -6,6 +6,7 @@
 package examenalgoritmos;
 
 import java.util.ArrayList;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -100,6 +101,35 @@ public class ABB {
     }
 
     /**
+     * Busca el Nodo correspondiente a la Ci que se pasa como parametro
+     *
+     * @param ci Cedula del cliente
+     * @return
+     */
+    public Nodo es_ClienteNodo(int ci) {
+        return es_ClienteNodo(this.Raiz, ci);
+    }
+
+    /**
+     * (Metodo Recursivo) Busca el Nodo correspondiente a la Ci que se pasa como
+     * parametro
+     *
+     * @param ci Cedula del cliente
+     * @param r Nodo Actual
+     * @return Nodo si existe en el arbol dicha cedula | null sinó
+     */
+    public Nodo es_ClienteNodo(Nodo r, int ci) {
+        if (r == null) {
+            return null;
+        } else if (ci < r.getCliente().getCi()) {
+            return es_ClienteNodo(r.getIzq(), ci);
+        } else if (ci > r.getCliente().getCi()) {
+            return es_ClienteNodo(r.getDer(), ci);
+        }
+        return r;
+    }
+
+    /**
      * Devuelve todos los clientes ordenados por cedula de forma ascendente
      */
     public void Mostrar_Clientes() {
@@ -171,17 +201,17 @@ public class ABB {
     /**
      * Devuelve la Altura del Arbol desde la raiz
      *
-     * @return -1 si r == null
+     * @return 0 si r == null
      */
     public int getAltura() {
-        return getAltura(this.Raiz);
+        return Math.max(getAltura(this.Raiz.getIzq()), getAltura(this.Raiz.getDer()));
     }
 
     /**
-     * (Metodo Recursivo) Devuelve la Cantidad de NODOS que hay entre un nodo r y la hoja mas
-     * lejana de este
+     * (Metodo Recursivo) Devuelve la Cantidad de NODOS que hay entre un nodo r
+     * y la hoja mas lejana de este
      *
-     * @param r
+     * @param r nodo actual
      * @return Altura Maxima del arbol
      */
     public int getAltura(Nodo r) {
@@ -189,10 +219,18 @@ public class ABB {
         if (r == null) {
             return 0;
         } else {
-            if (r.isHoja()) {
-                return 0;
-            }
             return 1 + (Math.max(getAltura(r.getIzq()), getAltura(r.getDer())));
         }
+    }
+
+    public boolean es_Equilibrado() {
+        return es_Equilibrado(this.Raiz);
+    }
+
+    public boolean es_Equilibrado(Nodo r) {
+        int Aizq = getAltura(r.getIzq());
+        int Ader = getAltura(r.getDer());
+
+        return Math.abs(Aizq - Ader) <= 1;
     }
 }
