@@ -13,15 +13,15 @@ public class Cliente {
     
     private int Ci;
     private String Nombre;
-    private String Apellido;
+    private int Anios;
 
     public Cliente() {
     }
 
-    public Cliente(int Ci, String Nombre, String Apellido) {
+    public Cliente(int Ci, String Nombre, int Anios) {
         this.Ci = Ci;
         this.Nombre = Nombre;
-        this.Apellido = Apellido;
+        this.Anios = Anios;
     }
 
     public int getCi() {
@@ -40,12 +40,12 @@ public class Cliente {
         this.Nombre = Nombre;
     }
 
-    public String getApellido() {
-        return Apellido;
+    public int getAnios() {
+        return Anios;
     }
 
-    public void setApellido(String Apellido) {
-        this.Apellido = Apellido;
+    public void setAnios(int Anios) {
+        this.Anios = Anios;
     }
     
     

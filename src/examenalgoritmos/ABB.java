@@ -5,9 +5,6 @@
  */
 package examenalgoritmos;
 
-import java.util.ArrayList;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  *
  * @author Daniel
@@ -50,6 +47,17 @@ public class ABB {
             r.setDer(insertNodo(r.getDer(), c));
         }
         return r;
+    }
+
+    /**
+     * Crea una nueva instancia Cliente, y lo agrega al Arbol Binario
+     *
+     * @param ci Cedula del Cliente
+     * @param nom Nombre del cliente
+     * @param anio Años del cliente
+     */
+    public void Agregar_Cliente(int ci, String nom, int anio) {
+        this.insertNodo(new Cliente(ci, nom, anio));
     }
 
     public void PreOrder() {
@@ -223,14 +231,57 @@ public class ABB {
         }
     }
 
+    /**
+     * Busca saber si el Arbol es Equilibrado
+     *
+     * @return true si es equilibrado
+     */
     public boolean es_Equilibrado() {
         return es_Equilibrado(this.Raiz);
     }
 
+    /**
+     * Busca saber si el Arbol es Equilibrado para un nodo R
+     *
+     * @param r Nodo Actual
+     * @return true si es equilibrado
+     */
     public boolean es_Equilibrado(Nodo r) {
         int Aizq = getAltura(r.getIzq());
         int Ader = getAltura(r.getDer());
 
         return Math.abs(Aizq - Ader) <= 1;
     }
+
+//    public Nodo es_PadreSubArbol(Nodo nd1, Nodo nd2) {
+//        Nodo izq;
+//        Nodo der;
+//
+//        if (nd1.getCliente().getCi() <= nd2.getCliente().getCi()) {
+//            izq = nd1;
+//            der = nd2;
+//        } else {
+//            izq = nd2;
+//            der = nd1;
+//        }
+//
+//        return es_PadreSubArbol(this.Raiz, izq, der);
+//    }
+//
+//    private Nodo es_PadreSubArbol(Nodo r, Nodo izq, Nodo der) {
+//        if (r == null) {
+//            return null;
+//        } else {
+//            if (r.getIzq().getCliente().getCi() == izq.getCliente().getCi()) {
+//                return es_PadreSubArbol(r.getIzq(), izq, der);
+//            }
+//
+//            if (r.getDer().getCliente().getCi() == || r.getDer() != nd2) {
+//                return es_PadreSubArbol(r.getDer(), nd1, nd2);
+//            }
+//
+//            return r;
+//        }
+//    }
+
 }

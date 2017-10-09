@@ -35,19 +35,13 @@ public class ArbolBBTest {
 
     @Before
     public void setUp() {
-        Cliente xC1 = new Cliente(56856958, "Julian", "Lopez");
-        Cliente xC2 = new Cliente(49658547, "Martica", "Gimenez");
-        Cliente xC3 = new Cliente(32158547, "Roberto", "Mamerto");
-        Cliente xC4 = new Cliente(29653347, "Pepe", "Cohen");
-        Cliente xC5 = new Cliente(69652020, "Miguel", "Aguado");
-
         miArbol = new ABB();
-        
-        miArbol.insertNodo(xC1);
-        miArbol.insertNodo(xC2);
-        miArbol.insertNodo(xC3);
-        miArbol.insertNodo(xC4);
-        miArbol.insertNodo(xC5);
+
+        miArbol.Agregar_Cliente(56856958, "Julian", 21);
+        miArbol.Agregar_Cliente(49658547, "Martica", 40);
+        miArbol.Agregar_Cliente(32158547, "Roberto", 33);
+        miArbol.Agregar_Cliente(29653347, "Pepe", 19);
+        miArbol.Agregar_Cliente(69652020, "Miguel", 52);
     }
 
     @After
@@ -65,8 +59,13 @@ public class ArbolBBTest {
     }
 
     @Test
-    public void testEs_Cliente() {
+    public void testEs_Cliente_True() {
         assertEquals(true, miArbol.es_Cliente(69652020));
+    }
+    
+    @Test
+    public void testEs_Cliente_False() {
+        assertEquals(false, miArbol.es_Cliente(19652020));
     }
 
     @Test
@@ -78,4 +77,20 @@ public class ArbolBBTest {
     public void testEs_Balanceado(){
         assertEquals(false, miArbol.es_Equilibrado());
     }
+    
+    @Test
+    public void testAgregar_Cliente(){
+        Cliente x = new Cliente(12345678, "Menganito", 20);
+        miArbol.Agregar_Cliente(12345678, "Menganito", 20);
+        assertEquals(x.getCi(), miArbol.es_ClienteNodo(12345678).getCliente().getCi());
+    }
+    
+//    @Test
+//    public void testEs_PadreSubArbol(){
+//        
+//        Nodo p = new Nodo(new Cliente(49658547, "Martica", 40));
+//        Nodo n1 = new Nodo(new Cliente(32158547, "Roberto", 33));
+//        Nodo n2 = new Nodo(new Cliente(29653347, "Pepe", 19));
+//        assertEquals(p, miArbol.es_PadreSubArbol(n1, n2));
+//    }
 }
