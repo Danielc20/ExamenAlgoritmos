@@ -211,8 +211,8 @@ public class ABB {
      *
      * @return 0 si r == null
      */
-    public int getAltura() {
-        return Math.max(getAltura(this.Raiz.getIzq()), getAltura(this.Raiz.getDer()));
+    public int altura() {
+        return Math.max(altura(this.Raiz.getIzq()), altura(this.Raiz.getDer()));
     }
 
     /**
@@ -222,12 +222,12 @@ public class ABB {
      * @param r nodo actual
      * @return Altura Maxima del arbol
      */
-    public int getAltura(Nodo r) {
+    public int altura(Nodo r) {
 
         if (r == null) {
             return 0;
         } else {
-            return 1 + (Math.max(getAltura(r.getIzq()), getAltura(r.getDer())));
+            return 1 + (Math.max(altura(r.getIzq()), altura(r.getDer())));
         }
     }
 
@@ -247,8 +247,8 @@ public class ABB {
      * @return true si es equilibrado
      */
     public boolean es_Equilibrado(Nodo r) {
-        int Aizq = getAltura(r.getIzq());
-        int Ader = getAltura(r.getDer());
+        int Aizq = altura(r.getIzq());
+        int Ader = altura(r.getDer());
 
         return Math.abs(Aizq - Ader) <= 1;
     }

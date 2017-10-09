@@ -55,7 +55,7 @@ public class ArbolBBTest {
 
     @Test
     public void testAltura() {
-        assertEquals(3, miArbol.getAltura());
+        assertEquals(3, miArbol.altura());
     }
 
     @Test
