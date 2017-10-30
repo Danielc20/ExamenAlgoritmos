@@ -85,6 +85,16 @@ public class ArbolBBTest {
         assertEquals(x.getCi(), miArbol.es_ClienteNodo(12345678).getCliente().getCi());
     }
     
+    @Test
+    public void testes_Vacio(){
+        assertEquals(false, miArbol.es_Vacio());
+    }
+    
+    @Test
+    public void testes_ArbolBinarioBusqueda(){
+        assertEquals(true, miArbol.es_ArbolBinarioBusqueda());
+    }
+    
 //    @Test
 //    public void testEs_PadreSubArbol(){
 //        

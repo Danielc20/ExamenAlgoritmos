@@ -23,17 +23,9 @@ public class ABB {
     public ABB() {
     }
 
-    /**
+    /*
      * Fin Constructor
      */
-    public Nodo getRaiz() {
-        return Raiz;
-    }
-
-    public void setRaiz(Nodo Raiz) {
-        this.Raiz = Raiz;
-    }
-
     public void insertNodo(Cliente c) {
         this.Raiz = insertNodo(this.Raiz, c);
     }
@@ -77,6 +69,26 @@ public class ABB {
         if (r.getDer() != null) {
             InOrder(r.getDer());
         }
+    }
+
+    public boolean hay_Camino(Nodo nd1, Nodo nd2) {
+        if (nd1 == null || nd2 == null) {
+            return false;
+        } else {
+            hay_Camino(nd1.getIzq(), nd2);
+            hay_Camino(nd1.getDer(), nd2);
+
+            return nd1 == nd2;
+        }
+    }
+
+    /**
+     * Chequea si la raiz es nula
+     *
+     * @return true si Raiz == null
+     */
+    public boolean es_Vacio() {
+        return this.Raiz == null;
     }
 
     /**
@@ -253,6 +265,27 @@ public class ABB {
         return Math.abs(Aizq - Ader) <= 1;
     }
 
+    public boolean es_ArbolBinarioBusqueda() {
+        return es_ArbolBinarioBusqueda(this.Raiz);
+    }
+
+    public boolean es_ArbolBinarioBusqueda(Nodo r) {
+        if (r == null) {
+            return false;
+        } else {
+            if (r.getIzq() != null) {
+                return es_ArbolBinarioBusqueda(r.getIzq());
+            }
+            if (r.getDer() != null) {
+                return es_ArbolBinarioBusqueda(r.getDer());
+            }
+            if (r.getCliente().compareTo(r.getIzq().getCliente()) >= 0 && r.getCliente().compareTo(r.getDer().getCliente()) < 0) {
+                return true;
+            }
+            return false;
+        }
+    }
+
 //    public Nodo es_PadreSubArbol(Nodo nd1, Nodo nd2) {
 //        Nodo izq;
 //        Nodo der;
@@ -283,5 +316,11 @@ public class ABB {
 //            return r;
 //        }
 //    }
+    public Nodo getRaiz() {
+        return Raiz;
+    }
 
+    public void setRaiz(Nodo Raiz) {
+        this.Raiz = Raiz;
+    }
 }

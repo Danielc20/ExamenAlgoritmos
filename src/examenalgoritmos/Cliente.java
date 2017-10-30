@@ -9,7 +9,7 @@ package examenalgoritmos;
  *
  * @author Daniel
  */
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
     
     private int Ci;
     private String Nombre;
@@ -24,6 +24,11 @@ public class Cliente {
         this.Anios = Anios;
     }
 
+    @Override
+    public int compareTo(Cliente o) {
+        return (this.getCi() - o.getCi());
+    }
+    
     public int getCi() {
         return Ci;
     }
