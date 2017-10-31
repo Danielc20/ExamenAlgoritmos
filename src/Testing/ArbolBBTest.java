@@ -62,7 +62,7 @@ public class ArbolBBTest {
     public void testEs_Cliente_True() {
         assertEquals(true, miArbol.es_Cliente(69652020));
     }
-    
+
     @Test
     public void testEs_Cliente_False() {
         assertEquals(false, miArbol.es_Cliente(19652020));
@@ -72,29 +72,34 @@ public class ArbolBBTest {
     public void testEs_ClienteNodo() {
         assertEquals(29653347, miArbol.es_ClienteNodo(29653347).getCliente().getCi());
     }
-    
+
     @Test
-    public void testEs_Balanceado(){
+    public void testEs_Balanceado() {
         assertEquals(false, miArbol.es_Equilibrado());
     }
-    
+
     @Test
-    public void testAgregar_Cliente(){
+    public void testAgregar_Cliente() {
         Cliente x = new Cliente(12345678, "Menganito", 20);
         miArbol.Agregar_Cliente(12345678, "Menganito", 20);
         assertEquals(x.getCi(), miArbol.es_ClienteNodo(12345678).getCliente().getCi());
     }
-    
+
     @Test
-    public void testes_Vacio(){
+    public void testes_Vacio() {
         assertEquals(false, miArbol.es_Vacio());
     }
-    
+
     @Test
-    public void testes_ArbolBinarioBusqueda(){
+    public void testes_ArbolBinarioBusqueda() {
         assertEquals(true, miArbol.es_ArbolBinarioBusqueda());
     }
-    
+
+    @Test
+    public void testhay_Camino() {
+        assertEquals(false, miArbol.hay_Camino(miArbol.getRaiz(), miArbol.getRaiz().getIzq().getIzq()));
+    }
+
 //    @Test
 //    public void testEs_PadreSubArbol(){
 //        

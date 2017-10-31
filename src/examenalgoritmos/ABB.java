@@ -41,6 +41,7 @@ public class ABB {
         return r;
     }
 
+
     /**
      * Crea una nueva instancia Cliente, y lo agrega al Arbol Binario
      *
@@ -71,15 +72,14 @@ public class ABB {
         }
     }
 
+    /**
+     * Busca si existe un camino entre un nodo 'nd1' y un nodo 'nd2'
+     * @param nd1 Nodo actual
+     * @param nd2 Nodo a encontrar
+     * @return true si existe camino | false sinó
+     */
     public boolean hay_Camino(Nodo nd1, Nodo nd2) {
-        if (nd1 == null || nd2 == null) {
-            return false;
-        } else {
-            hay_Camino(nd1.getIzq(), nd2);
-            hay_Camino(nd1.getDer(), nd2);
-
-            return nd1 == nd2;
-        }
+        return existe_Nodo(nd1, nd2);
     }
 
     /**
@@ -116,6 +116,23 @@ public class ABB {
             return es_Cliente(r.getIzq(), ci);
         } else if (ci > r.getCliente().getCi()) {
             return es_Cliente(r.getDer(), ci);
+        }
+        return true;
+    }
+    
+    /**
+     * (Metodo Recursivo) Busca si existe un nodo, en todo el subarbol 'r' dado
+     * @param r Nodo actual
+     * @param x Nodo a encontrar
+     * @return True si existe dentro del subarbol de 'r'
+     */
+    public boolean existe_Nodo(Nodo r, Nodo x) {
+        if (r == null) {
+            return false;
+        } else if (x.getCliente().compareTo(r.getCliente()) < 0) {
+            return existe_Nodo(r.getIzq(), x);
+        } else if (x.getCliente().compareTo(r.getCliente()) > 0) {
+            return existe_Nodo(r.getDer(), x);
         }
         return true;
     }

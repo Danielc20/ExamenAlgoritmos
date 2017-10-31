@@ -24,6 +24,10 @@ public class Cliente implements Comparable<Cliente>{
         this.Anios = Anios;
     }
 
+    Cliente(int ci) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
     public int compareTo(Cliente o) {
         return (this.getCi() - o.getCi());
