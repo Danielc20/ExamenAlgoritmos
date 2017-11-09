@@ -97,7 +97,7 @@ public class ArbolBBTest {
 
     @Test
     public void testhay_Camino() {
-        assertEquals(false, miArbol.hay_Camino(miArbol.getRaiz(), miArbol.getRaiz().getIzq().getIzq()));
+        assertEquals(true, miArbol.hay_Camino(miArbol.getRaiz(), miArbol.getRaiz().getIzq().getIzq()));
     }
 
 //    @Test

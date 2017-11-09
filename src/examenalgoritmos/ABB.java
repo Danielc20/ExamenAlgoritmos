@@ -41,7 +41,6 @@ public class ABB {
         return r;
     }
 
-
     /**
      * Crea una nueva instancia Cliente, y lo agrega al Arbol Binario
      *
@@ -74,6 +73,7 @@ public class ABB {
 
     /**
      * Busca si existe un camino entre un nodo 'nd1' y un nodo 'nd2'
+     *
      * @param nd1 Nodo actual
      * @param nd2 Nodo a encontrar
      * @return true si existe camino | false sinó
@@ -119,9 +119,10 @@ public class ABB {
         }
         return true;
     }
-    
+
     /**
      * (Metodo Recursivo) Busca si existe un nodo, en todo el subarbol 'r' dado
+     *
      * @param r Nodo actual
      * @param x Nodo a encontrar
      * @return True si existe dentro del subarbol de 'r'
@@ -283,56 +284,22 @@ public class ABB {
     }
 
     public boolean es_ArbolBinarioBusqueda() {
-        return es_ArbolBinarioBusqueda(this.Raiz);
+        return this.es_ArbolBinarioBusqueda(Raiz, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    public boolean es_ArbolBinarioBusqueda(Nodo r) {
+    public boolean es_ArbolBinarioBusqueda(Nodo r, int min, int max) {
         if (r == null) {
-            return false;
-        } else {
-            if (r.getIzq() != null) {
-                return es_ArbolBinarioBusqueda(r.getIzq());
-            }
-            if (r.getDer() != null) {
-                return es_ArbolBinarioBusqueda(r.getDer());
-            }
-            if (r.getCliente().compareTo(r.getIzq().getCliente()) >= 0 && r.getCliente().compareTo(r.getDer().getCliente()) < 0) {
-                return true;
-            }
+            return true;
+        }
+
+        if (r.getCliente().getCi() < min || r.getCliente().getCi() > max) {
             return false;
         }
+
+        return (es_ArbolBinarioBusqueda(r.getIzq(), min, r.getCliente().getCi() - 1)
+                && es_ArbolBinarioBusqueda(r.getDer(), r.getCliente().getCi() + 1, max));
     }
 
-//    public Nodo es_PadreSubArbol(Nodo nd1, Nodo nd2) {
-//        Nodo izq;
-//        Nodo der;
-//
-//        if (nd1.getCliente().getCi() <= nd2.getCliente().getCi()) {
-//            izq = nd1;
-//            der = nd2;
-//        } else {
-//            izq = nd2;
-//            der = nd1;
-//        }
-//
-//        return es_PadreSubArbol(this.Raiz, izq, der);
-//    }
-//
-//    private Nodo es_PadreSubArbol(Nodo r, Nodo izq, Nodo der) {
-//        if (r == null) {
-//            return null;
-//        } else {
-//            if (r.getIzq().getCliente().getCi() == izq.getCliente().getCi()) {
-//                return es_PadreSubArbol(r.getIzq(), izq, der);
-//            }
-//
-//            if (r.getDer().getCliente().getCi() == || r.getDer() != nd2) {
-//                return es_PadreSubArbol(r.getDer(), nd1, nd2);
-//            }
-//
-//            return r;
-//        }
-//    }
     public Nodo getRaiz() {
         return Raiz;
     }
