@@ -119,6 +119,30 @@ public class ABB {
         }
         return true;
     }
+    
+    public boolean es_Completo(){
+        return es_Completo(this.Raiz);
+    }
+
+    public boolean es_Completo(Nodo r) {
+        if (r == null) {
+            return true;
+        }
+        int h = altura();
+        int n = contarNodos(r);
+        if (n == Math.pow(2, h) - 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int contarNodos(Nodo r) {
+        if (r == null) {
+            return 0;
+        }
+        return 1 + contarNodos(r.getIzq()) + contarNodos(r.getDer());
+    }
 
     /**
      * (Metodo Recursivo) Busca si existe un nodo, en todo el subarbol 'r' dado

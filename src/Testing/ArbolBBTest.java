@@ -99,6 +99,11 @@ public class ArbolBBTest {
     public void testhay_Camino() {
         assertEquals(true, miArbol.hay_Camino(miArbol.getRaiz(), miArbol.getRaiz().getIzq().getIzq()));
     }
+    
+    @Test
+    public void testes_Completo(){
+        assertEquals(false, miArbol.es_Completo());
+    }
 
 //    @Test
 //    public void testEs_PadreSubArbol(){
