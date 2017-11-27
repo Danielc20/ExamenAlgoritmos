@@ -166,12 +166,52 @@ public class ABB {
      * Busca el Nodo correspondiente a la Ci que se pasa como parametro
      *
      * @param ci Cedula del cliente
-     * @return
+     * @return Nodo si existe en el arbol dicha cedula | null sinó
      */
     public Nodo es_ClienteNodo(int ci) {
         return es_ClienteNodo(this.Raiz, ci);
     }
+    
+    public int niveles(){
+        int cont = niveles(this.Raiz);
+        if (cont > 0) {
+            return cont-1;
+        }
+        return cont;
+    }
+    
+    public int niveles(Nodo r){
+        if (r == null) {
+            return 0;
+        }else{
+            return 1 + Math.max(niveles(r.getIzq()), niveles(r.getDer()));
+        }
+    }
 
+    /**
+     * Busca el Nodo padre para un nodo hijo <b>'a'</b>
+     * @param r Nodo Padre a buscar
+     * @param a Nodo hijo
+     * @return Nodo || null
+     */
+    public Nodo es_PadreSubArbol(Nodo r, Nodo a){
+        if (this.Raiz == null) {
+            return null;
+        }
+        if (r == null) {
+            return null;
+        }
+        if (r.getIzq() == a || r.getDer() == a) {
+            return r;
+        }
+        if (a.getCliente().compareTo(r.getCliente()) < 0) {
+            return es_PadreSubArbol(r.getIzq(), a);
+        }
+        else{
+            return es_PadreSubArbol(r.getDer(), a);
+        }
+    }
+    
     /**
      * (Metodo Recursivo) Busca el Nodo correspondiente a la Ci que se pasa como
      * parametro
@@ -310,6 +350,41 @@ public class ABB {
     public boolean es_ArbolBinarioBusqueda() {
         return this.es_ArbolBinarioBusqueda(Raiz, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
+    
+    public void Eliminar_Cliente(int ci){
+        this.Raiz = Eliminar_Cliente(this.Raiz ,ci);
+    }
+    
+    public Nodo Eliminar_Cliente(Nodo r, int ci){
+        if (r == null) {
+            return null;
+        }
+        if (r.getCliente().getCi() == ci) {
+            return this.unir(r.getIzq(),r.getDer());
+        }
+        if (ci < r.getCliente().getCi()) {
+            r.setIzq(this.Eliminar_Cliente(r.getIzq(), ci));
+        }
+        else{
+            r.setDer(this.Eliminar_Cliente(r.getDer(), ci));
+        }
+        
+        return r;
+    }
+    
+   public Nodo unir(Nodo izq, Nodo der){
+       if (izq == null) {
+           return der;
+       }
+       if (der == null) {
+           return izq;
+       }
+       Nodo NodoCentral = this.unir(izq.getDer(), der.getIzq());
+       izq.setDer(NodoCentral);
+       der.setIzq(izq);
+       return der;
+   }
+
 
     public boolean es_ArbolBinarioBusqueda(Nodo r, int min, int max) {
         if (r == null) {

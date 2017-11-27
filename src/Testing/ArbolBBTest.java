@@ -104,6 +104,17 @@ public class ArbolBBTest {
     public void testes_Completo(){
         assertEquals(false, miArbol.es_Completo());
     }
+    
+    @Test
+    public void testEliminar_Cliente(){
+        miArbol.Eliminar_Cliente(32158547);
+        assertEquals(null, miArbol.es_ClienteNodo(32158547));
+    }
+    
+    @Test
+    public void testNiveles(){
+        assertEquals(3, miArbol.niveles());
+    }
 
 //    @Test
 //    public void testEs_PadreSubArbol(){
